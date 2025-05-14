@@ -13,7 +13,7 @@
                             <h5 class="card-title">{{ $movie->title }}</h5>
                             <p class="card-text">{{ Str::limit($movie->synopsis, 150) }}</p>
                             <p class="card-text small text-secondary"> Year : {{ $movie->year }}</p>
-                            <a href="{{ route('movies.show', $movie->id) }}/{{ $movie->slug }}" class="btn btn-success btn-sm">Read More
+                            <a href="/movies/{{$movie->id}}/{{ $movie->slug }}" class="btn btn-success btn-sm">Read More
                             </a>
                         </div>
                     </div>
