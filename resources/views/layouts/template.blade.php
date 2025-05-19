@@ -17,7 +17,7 @@
     {{-- Navbar --}}
     <nav class="navbar navbar-expand-lg navbar-dark bg-success fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="#">Movie DB</a>
+            <a class="navbar-brand" href="/">Movie DB</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -28,7 +28,7 @@
                         <a class="nav-link active" href="{{ route('movies.index') }}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Watchlist</a>
+                        <a class="nav-link" href="/movie/create">Input Movie</a>
                     </li>
                 </ul>
                 <form class="d-flex" action="{{ route('movies.index') }}" method="GET">
