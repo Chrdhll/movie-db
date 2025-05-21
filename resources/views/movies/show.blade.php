@@ -6,7 +6,6 @@
         <h2 class="mb-4">{{ $movie->title }}</h2>
         <div class="card d-flex flex-row h-100">
             <img src="{{ $movie->cover_image_url }}" alt="Cover" class="card-img-left img-fluid" style="height: 70vh">
-
             <div class="card-body">
                 <p class="card-text text-secondary">{{ $movie->slug }}</p>
                 <p class="card-text">Actors : {{ $movie->actors }}</p>

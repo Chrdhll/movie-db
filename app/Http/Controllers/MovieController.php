@@ -33,10 +33,10 @@ class MovieController extends Controller
         $validatedData = $request->validate([
             'title' => ['required','string','max:255'],
             'synopsis' => ['required','string'],
-            'year' => ['required'],
+            'year' => ['required','integer','min:1900','max:' . date('Y')],
             'actors' => ['required','string','max:255'],
             'category_id' => ['required','exists:categories,id'],
-            'cover_image' => ['required','image'],
+            'cover_image' => ['nullable','image','mimes:png,jpg,jpeg,webp','max:2048'],
         ]);
         
         //handle upload gambar
