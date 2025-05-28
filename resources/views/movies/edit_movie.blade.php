@@ -1,29 +1,26 @@
 @extends('layouts.template')
-@section('title', 'Form input movie')
+@section('title', 'Edit Movie')
 @section('content')
     <div class="container mt-5">
-        <div class="row d-flex justify-content-between align-items-center">
-            <div class="col-auto">
-                <h1>Form Input Movie</h1>
-            </div>
-            <div class="col-auto">
-                <a href="/movie" class="btn btn-primary">Data Movie</a>
-            </div>
+        <div>
+            <h1>Form Edit Movie</h1>
         </div>
 
-        <form action="/movie/store" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
+        <form action="/movie/{{ $movies->id }}/update" method="POST" enctype="multipart/form-data" class="needs-validation"
+            novalidate>
             @csrf
+            @method('PUT')
 
             <div class="form-floating mb-3">
                 <input type="text" class="form-control border-success" id="title" placeholder="Judul" name="title"
-                    required>
+                    required value="{{ old('title', $movies->title) }}">
                 <label for="title">Judul</label>
                 <div class="invalid-feedback">Judul wajib diisi.</div>
             </div>
 
             <div class="form-floating mb-3">
                 <textarea class="form-control border-success" placeholder="Synopsis" id="synopsis" name="synopsis" required
-                    style="height: 150px"></textarea>
+                    style="height: 150px">{{ old('synopsis', $movies->synopsis) }}</textarea>
                 <label for="synopsis">Synopsis</label>
                 <div class="invalid-feedback">Synopsis wajib diisi.</div>
             </div>
@@ -34,7 +31,9 @@
                         <select class="form-select border-success" name="category_id" id="category_id" required>
                             <option selected disabled value="">Pilih kategori</option>
                             @foreach ($categories as $kategori)
-                                <option value="{{ $kategori->id }}">{{ $kategori->category_name }}</option>
+                                <option value="{{ $kategori->id }}"
+                                    {{ old('category_id', $movies->category_id) == $kategori->id ? 'selected' : '' }}>
+                                    {{ $kategori->category_name }}</option>
                             @endforeach
                         </select>
                         <label for="category_id">Kategori</label>
@@ -45,7 +44,7 @@
                 <div class="col-md-6">
                     <div class="form-floating mb-3">
                         <input type="number" class="form-control border-success" id="year" name="year"
-                            placeholder="Tahun" required>
+                            placeholder="Tahun" required value="{{ old('year', $movies->year) }}">
                         <label for="year">Tahun</label>
                         <div class="invalid-feedback">Tahun wajib diisi.</div>
                     </div>
@@ -54,13 +53,17 @@
 
             <div class="form-floating mb-3">
                 <input type="text" class="form-control border-success" id="actors" name="actors" placeholder="Aktor"
-                    required>
+                    required value="{{ old('actors', $movies->actors) }}">
                 <label for="actors">Aktor</label>
                 <div class="invalid-feedback">Aktor wajib diisi.</div>
             </div>
 
             <div class="form-floating mb-3">
+
                 <input type="file" class="form-control border-success" id="cover_image" name="cover_image" required>
+                @if ($movies->cover_image_url)
+                    <img src="{{ $movies->cover_image_url }}" alt="Cover" style="max-width: 150px; margin-top: 10px;">
+                @endif
                 <label for="cover_image">Pilih gambar</label>
                 <div class="invalid-feedback">Gambar wajib dipilih.</div>
             </div>
