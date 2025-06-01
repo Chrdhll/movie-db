@@ -14,7 +14,7 @@
                 <div class="card shadow">
                     <div class="card-body">
                         <table class="table table-responsive table-bordered table-hover table-striped">
-                            <thead>
+                            <thead class="text-white bg-success align-middle  ">
                                 <tr>
                                     <th>Judul</th>
                                     <th>Kategori</th>

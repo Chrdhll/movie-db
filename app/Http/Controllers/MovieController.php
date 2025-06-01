@@ -9,9 +9,20 @@ use Illuminate\Http\Request;
 
 class MovieController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $movies = Movie::latest()->paginate(6); // atau sesuai kebutuhan
+        // $movies = Movie::latest()->paginate(6);
+        // return view('movies.home_page', compact('movies'));
+
+        $query = Movie::with('category');
+
+        // Filter berdasarkan search keyword
+        if ($request->has('search') && !empty($request->search)) {
+            $query->where('title', 'LIKE', '%' . $request->search . '%');
+        }
+
+        $movies = $query->latest()->paginate(6)->withQueryString(); // supaya pagination bawa search
+
         return view('movies.home_page', compact('movies'));
     }
 
@@ -116,10 +127,10 @@ class MovieController extends Controller
     }
 
     public function detail($id)
-{
-    $movie = Movie::with('category')->findOrFail($id);
-    
-    // Return partial untuk AJAX
-    return view('movies.detail-content', compact('movie'));
-}
+    {
+        $movie = Movie::with('category')->findOrFail($id);
+
+        // Return partial untuk AJAX
+        return view('movies.detail-content', compact('movie'));
+    }
 }

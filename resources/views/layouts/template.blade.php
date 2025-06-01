@@ -93,11 +93,13 @@
 
                     @endauth
                 </ul>
-                <form class="d-flex" action="{{ route('movies.index') }}" method="GET">
-                    <input class="form-control me-2" type="search" name="search" placeholder="Search"
-                        aria-label="Search">
-                    <button class="btn btn-outline-light" type="submit">Search</button>
-                </form>
+                @if (request()->routeIs('movies.index'))
+                    <form class="d-flex" action="{{ route('movies.index') }}" method="GET">
+                        <input class="form-control me-2" type="search" name="search" placeholder="Search"
+                            aria-label="Search" value="{{ request('search') }}">
+                        <button class="btn btn-outline-light" type="submit">Search</button>
+                    </form>
+                @endif
             </div>
         </div>
     </nav>
