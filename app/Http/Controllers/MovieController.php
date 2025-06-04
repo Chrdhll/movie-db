@@ -72,7 +72,7 @@ class MovieController extends Controller
     public function data_movie()
     {
         $movies = Movie::with('category')->latest()->paginate(10);
-        return view('movies.data_movie', compact('movies'));
+        return view('admin.data_movie', compact('movies'));
     }
 
 
@@ -91,7 +91,7 @@ class MovieController extends Controller
     {
         $movies = Movie::findOrFail($id);
         $categories = Category::all();
-        return view('movies.edit_movie', compact('movies', 'categories'));
+        return view('admin.edit_movie', compact('movies', 'categories'));
     }
 
     public function update(Request $request, $id)
@@ -135,6 +135,6 @@ class MovieController extends Controller
         $movie = Movie::with('category')->findOrFail($id);
 
         // Return partial untuk AJAX
-        return view('movies.detail-content', compact('movie'));
+        return view('admin.detail-content', compact('movie'));
     }
 }
