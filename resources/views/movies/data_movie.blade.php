@@ -14,10 +14,11 @@
                 <div class="card shadow">
                     <div class="card-body">
                         <table class="table table-responsive table-bordered table-hover table-striped">
-                            <thead class="text-white bg-success align-middle  ">
+                            <thead class="text-white bg-success align-middle shadow-sm table-success">
                                 <tr>
                                     <th>Judul</th>
                                     <th>Kategori</th>
+                                    <th>Aktor</th>
                                     <th>Tahun</th>
                                     <th>Gambar</th>
                                     <th>Aksi</th>
@@ -35,6 +36,7 @@
                                         <tr>
                                             <td>{{ $item->title }}</td>
                                             <td>{{ $item->category->category_name }}</td>
+                                            <td>{{ $item->actors }}</td>
                                             <td>{{ $item->year }}</td>
                                             <td><img src="{{ $item->cover_image_url }}" alt="Cover Image" width="100">
                                             </td>
@@ -45,18 +47,23 @@
                                                         data-id="{{ $item->id }}">
                                                         <i class="fas fa-eye"></i>
                                                     </a>
-                                                    <a href="/movies/{{ $item->id }}/edit"
-                                                        class="btn btn-sm btn-warning m-1">
-                                                        <i class="fas fa-pen"></i></a>
-                                                    <form action="/movies/{{ $item->id }}/delete" method="POST"
-                                                        class="m-1">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit"
-                                                            onclick="return confirm('Yakin ingin hapus?')"
-                                                            class="btn btn-sm btn-danger">
-                                                            <i class="fas fa-eraser"></i></button>
-                                                    </form>
+                                                    @if (auth()->user()->role === 'admin')
+                                                        <a href="/movies/{{ $item->id }}/edit"
+                                                            class="btn btn-sm btn-warning m-1">
+                                                            <i class="fas fa-pen"></i></a>
+                                                    @endif
+
+                                                    @can('delete-movie')
+                                                        <form action="/movies/{{ $item->id }}/delete" method="POST"
+                                                            class="m-1">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit"
+                                                                onclick="return confirm('Yakin ingin hapus?')"
+                                                                class="btn btn-sm btn-danger">
+                                                                <i class="fas fa-eraser"></i></button>
+                                                        </form>
+                                                    @endcan
                                                 </div>
                                             </td>
                                         </tr>
@@ -69,14 +76,9 @@
                             {{ $movies->links('vendor.pagination.bootstrap-5') }}
                         </div>
                     </div>
-
-
                 </div>
-
             </div>
-
         </div>
-
     </div>
 
     <!-- Modal Detail -->

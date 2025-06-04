@@ -63,6 +63,9 @@
                     <li class="nav-item">
                         <a class="nav-link active" href="{{ route('movies.index') }}">Home</a>
                     </li>
+                </ul>
+
+                <ul class="navbar-nav ms-auto">
                     @auth
                         <li class="nav-item">
                             <a class="nav-link" href="/movie/create">Input Movie</a>
@@ -88,7 +91,7 @@
                         </li>
                     @else
                         <li class="nav-item">
-                            <a class="nav-link login" role="button" href="/login">Login</a>
+                            <a class="nav-link login active btn btn-outline-success btn-sm" href="/login">Login</a>
                         </li>
 
                     @endauth
@@ -121,3 +124,4 @@
 </body>
 
 </html>
+

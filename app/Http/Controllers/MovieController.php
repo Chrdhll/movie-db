@@ -6,6 +6,7 @@ use App\Models\Movie;
 use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class MovieController extends Controller
 {
@@ -77,10 +78,13 @@ class MovieController extends Controller
 
     public function destroy($id)
     {
-        $movies = Movie::findOrFail($id);
-        $movies->delete();
+        if (Gate::allows('delete-movie')) {
+            $movies = Movie::findOrFail($id);
+            $movies->delete();
 
-        return redirect('/movie')->with('success', 'berhasil menghapus data');
+            return redirect('/movie')->with('success', 'berhasil menghapus data');
+        }
+        abort(403);
     }
 
     public function edit($id)
