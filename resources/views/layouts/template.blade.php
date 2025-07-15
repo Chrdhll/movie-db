@@ -65,7 +65,7 @@
                     </li>
                 </ul>
 
-                <ul class="navbar-nav ms-auto">
+                <ul class="navbar-nav me-3">
                     @auth
                         <li class="nav-item">
                             <a class="nav-link" href="/movie/create">Input Movie</a>

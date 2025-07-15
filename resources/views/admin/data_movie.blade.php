@@ -16,6 +16,7 @@
                         <table class="table table-responsive table-bordered table-hover table-striped">
                             <thead class="text-white bg-success align-middle shadow-sm table-success">
                                 <tr>
+                                    <th>No</th>
                                     <th>Judul</th>
                                     <th>Kategori</th>
                                     <th>Aktor</th>
@@ -34,6 +35,7 @@
                                 <tbody>
                                     @foreach ($movies as $item)
                                         <tr>
+                                            <td>{{ $loop->iteration }}</td>
                                             <td>{{ $item->title }}</td>
                                             <td>{{ $item->category->category_name }}</td>
                                             <td>{{ $item->actors }}</td>
